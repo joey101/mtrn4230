@@ -1,0 +1,2 @@
+fruit = imread('TestImage.jpg');
+imshow(fruit)
