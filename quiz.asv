@@ -1,0 +1,71 @@
+startup_rvc
+A1 = [0; 0];
+A2 = [220; 0];
+A3 = [220; 100];
+A4 = [0; 100];
+
+B1 = [30; 60];
+B2 = [300; 50];
+B3 = [260; 230];
+B4 = [60; 180];
+
+C = [80; 160];
+
+world_coordinates = [A1 A2 A3 A4];
+img_coordinates = [B1 B2 B3 B4];
+
+tform = fitgeotrans(img_coordinates', world_coordinates', 'projective');
+H_matrix = tform.T;
+
+transformPointsForward(tform,C')
+
+
+disp(H_matrix);
+
+
+theta_1 = 40; % degrees
+theta_2 = 110; % degrees
+
+% Convert angles to radians
+theta_1_rad = deg2rad(theta_1);
+theta_2_rad = deg2rad(theta_2);
+
+% Position of the end effector (assuming it is given)
+x = 38.5069; % Replace with the x-coordinate of the end effector
+y = 74.8968 %Replace with the y-coordinate of the end effector
+
+% Calculate link lengths
+Lx = x - cos(theta_1_rad + theta_2_rad);
+Ly = y - sin(theta_1_rad + theta_2_rad);
+
+% Display link lengths
+disp(['Lx = ', num2str(Lx), ' mm']);
+disp(['Ly = ', num2str(Ly), ' mm']);
+
+
+
+%%
+
+% Given data
+theta_1 = 40; % degrees
+theta_2 = 110; % degrees
+omega_1 = 0.4; % rad/s
+omega_2 = 0.25; % rad/s
+Lx = 100; % Link length Lx in mm (placeholder value, replace with actual value)
+Ly = 100; % Link length Ly in mm (placeholder value, replace with actual value)
+
+% Convert angles to radians
+theta_1_rad = deg2rad(theta_1);
+theta_2_rad = deg2rad(theta_2);
+
+% Calculate the Jacobian matrix
+J = [-Lx * sin(theta_1_rad) - Ly * sin(theta_1_rad + theta_2_rad), -Ly * sin(theta_1_rad + theta_2_rad);
+     Lx * cos(theta_1_rad) + Ly * cos(theta_1_rad + theta_2_rad),  Ly * cos(theta_1_rad + theta_2_rad)];
+
+% Calculate the end-effector velocity [Vx, Vy]
+end_effector_velocity = J * [omega_1; omega_2];
+
+% Display the end-effector velocity
+disp('End-effector velocity [Vx, Vy] in mm/s:');
+disp(end_effector_velocity);
+
