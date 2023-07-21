@@ -1,10 +1,6 @@
 % Import the Robotics Toolbox
 clear all
 %% Part 1 =================================================================
-theta = [0, 0, 0, 0, 0, 0]; % theta values in radians
-a = [0, -0.425, -0.3922, 0, 0, 0]; % a values in meters
-d = [0.1625, 0, 0, 0.1333, 0.0997, 0.0996]; % d values in meters
-alpha = [pi/2, 0, 0, pi/2, -pi/2, 0]; % alpha values in radians
 
 % Define the joint positions in radians
 joint_positions = deg2rad([-106.12, -162.47, 135.49, 205.71, 15.19, 0.01]);
@@ -48,6 +44,7 @@ robot = SerialLink(L, 'name', 'UR5e');
 
 % Display the robot model
 robot.display();
+robot.plot([theta]);
 %% Part 3 =================================================================
 % Define the joint angles for Joint Variable A
 % Convert the joint angles from degrees to radians
