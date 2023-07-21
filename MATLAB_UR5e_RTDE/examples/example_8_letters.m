@@ -48,9 +48,9 @@ hold off; % No longer keep the current plot when adding new plots
 
 
 % % TCP Host and Port settings
-% host = '127.0.0.1'; % THIS IP ADDRESS MUST BE USED FOR THE VIRTUAL BOX VM
+host = '127.0.0.1'; % THIS IP ADDRESS MUST BE USED FOR THE VIRTUAL BOX VM
 %host = '192.168.230.128'; % THIS IP ADDRESS MUST BE USED FOR THE VMWARE
-host = '192.168.0.100'; % THIS IP ADDRESS MUST BE USED FOR THE REAL ROBOT
+%host = '192.168.0.100'; % THIS IP ADDRESS MUST BE USED FOR THE REAL ROBOT
 port = 30003;
 % 
 
