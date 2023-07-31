@@ -6,7 +6,7 @@ d = [0.1625, 0, 0, 0.1333, 0.0997, 0.0996]; % d values in meters
 alpha = [pi/2, 0, 0, pi/2, -pi/2, 0]; % alpha values in radians
 
 % Define the joint positions in radians
-joint_positions = deg2rad([-106.12, -162.47, 135.49, 205.71, 15.19, 0.01]);
+joint_positions = deg2rad([-106.12, -162.47, 135.49, 205.71, 15.19, 0.01])
 
 % Initialize the overall transformation matrix
 T = eye(4);
