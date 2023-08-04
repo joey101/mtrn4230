@@ -1,31 +1,30 @@
 
+%%
+% Load the image
+camList = webcamlist;
+cam = camlist(1);
+preview(cam);
+con4File = snapshot(cam);
 
-con4File = imread('TestImage.jpg');
-%imshow(con4File)
+img = imread(con4File);
 
-maskR = (con4File(:,:,1) > 135)&(con4File(:,:,1) < 155);
-maskG = (con4File(:,:,2) > 200)&(con4File(:,:,2) < 220);
-maskB = (con4File(:,:,3) > 70)&(con4File(:,:,3) < 90);
-mask = maskR&maskG&maskB;
-se = strel('disk',7);
-mask = imclose(mask, se);
-%imshow(mask);
+% Convert the image to HSV color space
+img_hsv = rgb2hsv(img);
 
-mask = bwareaopen(mask, 100);
-imshow(mask);
+% Identify the corners of the game board
+mask_yellow = img_hsv(:,:,1) > hue_lower_bound_yellow & img_hsv(:,:,1) < hue_upper_bound_yellow;
+stats_yellow = regionprops(mask_yellow, 'Centroid');
+corners_img = cat(1, stats_yellow.Centroid);
 
-[centers,radii] = imfindcircles(mask, [20,50]);
-hold on;
-plot(centers(:,1),centers(:,2),'r*');
+% Calculate the homography matrix
+corners_real = [-250, 75; -250, -525; -900, 75; -900, -525];
+tform = estimateGeometricTransform(corners_img, corners_real, 'projective');
 
-% for connecting to lab robot webcam
-%camList = webcamlist;
-%cam = camlist(1);
-%con4File = snapshot(cam);
+% Identify the pieces
+mask_green = img_hsv(:,:,1) > hue_lower_bound_green & img_hsv(:,:,1) < hue_upper_bound_green;
+stats_green = regionprops(mask_green, 'Centroid');
+pieces_img = cat(1, stats_green.Centroid);
 
-world = [0 0; 0 450; 650 450; 650 0];
-tform = fitgeotrans(centers, world, 'projective');
-hold off;
-con4FileTrans = imwarp(con4File, tform, outputView=imref2d(size(con4File)));
-imshow(imcrop(con4FileTrans, [0 0 650 450]));
+% Obtain the pose of the pieces
+pieces_real = transformPointsForward(tform, pieces_img);
 
