@@ -8,7 +8,7 @@ preview(webcam(1));
 
 % Capture one frame from the webcam
 rgb_image = snapshot(cam);
-
+1
 % Define the lower and upper bounds for yellow in HSV
 hsv_lower_bound = [20/360, 100/255, 100/255]; % Normalized to [0, 1]
 hsv_upper_bound = [30/360, 255/255, 255/255]; % Normalized to [0, 1]
