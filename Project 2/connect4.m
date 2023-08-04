@@ -2,6 +2,7 @@
 %%
 % Connect to the webcam
 % Preview the webcam
+cam = webcam(1);
 preview(webcam(1));
 
 
