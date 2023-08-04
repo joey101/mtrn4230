@@ -24,6 +24,11 @@ mask = hsv_image(:,:,1) >= hsv_lower_bound(1) & hsv_image(:,:,1) <= hsv_upper_bo
 % Apply the mask to the RGB image
 masked_rgb_image = bsxfun(@times, rgb_image, cast(mask, 'like', rgb_image));
 
+% Display the HSV image
+imshow(hsv_image);
+
+% Display the masked image
+imshow(rgb_image);
 % Display the masked image
 imshow(masked_rgb_image);
 
