@@ -1,30 +1,32 @@
 
 %%
-% Load the image
-camList = webcamlist;
-cam = camlist(1);
-preview(cam);
-con4File = snapshot(cam);
+% Connect to the webcam
+% Preview the webcam
+preview(webcam(1));
 
-img = imread(con4File);
 
-% Convert the image to HSV color space
-img_hsv = rgb2hsv(img);
+% Capture one frame from the webcam
+rgb_image = snapshot(cam);
 
-% Identify the corners of the game board
-mask_yellow = img_hsv(:,:,1) > hue_lower_bound_yellow & img_hsv(:,:,1) < hue_upper_bound_yellow;
-stats_yellow = regionprops(mask_yellow, 'Centroid');
-corners_img = cat(1, stats_yellow.Centroid);
+% Define the lower and upper bounds for the HSV values
+hsv_lower_bound = [0.1, 0.2, 0.3]; % Replace with your values
+hsv_upper_bound = [0.4, 0.5, 0.6]; % Replace with your values
 
-% Calculate the homography matrix
-corners_real = [-250, 75; -250, -525; -900, 75; -900, -525];
-tform = estimateGeometricTransform(corners_img, corners_real, 'projective');
+% Convert the RGB image to an HSV image
+hsv_image = rgb2hsv(rgb_image);
 
-% Identify the pieces
-mask_green = img_hsv(:,:,1) > hue_lower_bound_green & img_hsv(:,:,1) < hue_upper_bound_green;
-stats_green = regionprops(mask_green, 'Centroid');
-pieces_img = cat(1, stats_green.Centroid);
+% Create a mask that identifies the pixels in the HSV image that are within the specified bounds
+mask = hsv_image(:,:,1) >= hsv_lower_bound(1) & hsv_image(:,:,1) <= hsv_upper_bound(1) & ...
+       hsv_image(:,:,2) >= hsv_lower_bound(2) & hsv_image(:,:,2) <= hsv_upper_bound(2) & ...
+       hsv_image(:,:,3) >= hsv_lower_bound(3) & hsv_image(:,:,3) <= hsv_upper_bound(3);
 
-% Obtain the pose of the pieces
-pieces_real = transformPointsForward(tform, pieces_img);
+% Apply the mask to the RGB image
+masked_rgb_image = bsxfun(@times, rgb_image, cast(mask, 'like', rgb_image));
+
+% Display the masked image
+imshow(masked_rgb_image);
+
+% Clear the webcam
+clear cam;
+
 
