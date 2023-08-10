@@ -22,9 +22,9 @@ function [transformation,transformation_purple, homography_matrix] = computeHomo
     
     disp("Homography Matrix for Orange: ")
     disp(homography_matrix)
-    disp("Transformation Matrix for Orange: ")
+    
     for i = 1:3
-        fprintf('%10.4f %10.4f %10.4f\n', transformation.T(i, 1), transformation.T(i, 2), transformation.T(i, 3));
+        fprintf('%10.4f %10.4f %10.4f\n', transformation(i, 1), transformation(i, 2), transformation(i, 3));
     end
     fprintf('\n'); % Add a newline for separation
     
@@ -32,9 +32,8 @@ function [transformation,transformation_purple, homography_matrix] = computeHomo
     disp(homography_matrix_purple)
     disp("Transformation Matrix for Purple: ")
     for z = 1:3
-        fprintf('%10.4f %10.4f %10.4f\n', transformation_purple.T(z, 1), transformation_purple.T(z, 2), transformation_purple.T(z, 3));
+        fprintf('%10.4f %10.4f %10.4f\n', transformation_purple(z, 1), transformation_purple(z, 2), transformation_purple(z, 3));
     end
-
 
    
 end

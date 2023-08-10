@@ -1,21 +1,21 @@
 function [green_centroids, red_centroids, blue_centroids, green_stats, red_stats, blue_stats] = detectGamePieces(hsv_image, ROI_mask)
-    threshold = input("Which Threshold values do you want to use (1-2): ");
-    if threshold == 1
-        % Adjusted HSV thresholds for green (player piece)
-        green_hue_threshold = [0.37, 0.41];
-        green_saturation_threshold = [0.4, 1];
-        green_value_threshold = [0.4, 1];
-        
-        % % Adjusted HSV thresholds for red (obstacle)
-        red_hue_threshold = [0.95, 1.00];
-        red_saturation_threshold = [0.8, 0.9];
-        red_value_threshold = [0.6, 0.7];
-        
-        % % HSV thresholds for blue (obstacle)
-        blue_hue_threshold = [0.55, 0.65];
-        blue_saturation_threshold = [0.4, 1];
-        blue_value_threshold = [0.4, 1];
-    else
+    % threshold = input("Which Threshold values do you want to use (1-2): ");
+    % if threshold == 1
+        % % Adjusted HSV thresholds for green (player piece)
+        % green_hue_threshold = [0.37, 0.41];
+        % green_saturation_threshold = [0.4, 1];
+        % green_value_threshold = [0.4, 1];
+        % 
+        % % % Adjusted HSV thresholds for red (obstacle)
+        % red_hue_threshold = [0.95, 1.00];
+        % red_saturation_threshold = [0.8, 0.9];
+        % red_value_threshold = [0.6, 0.7];
+        % 
+        % % % HSV thresholds for blue (obstacle)
+        % blue_hue_threshold = [0.55, 0.65];
+        % blue_saturation_threshold = [0.4, 1];
+        % blue_value_threshold = [0.4, 1];
+    % else
         % Adjusted HSV thresholds for green (player piece)
         green_hue_threshold = [0.33, 0.43];
         green_saturation_threshold = [0.45, 1];
@@ -30,7 +30,7 @@ function [green_centroids, red_centroids, blue_centroids, green_stats, red_stats
         blue_hue_threshold = [0.53, 0.67];
         blue_saturation_threshold = [0.45, 1];
         blue_value_threshold = [0.45, 0.85];
-    end
+    % end
     
     
     % Create masks based on the thresholds
