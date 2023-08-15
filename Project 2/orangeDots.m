@@ -26,12 +26,29 @@ function [orange_centroids] = orangeDots(hsv_image)
     % Detecting centroids of the orange regions
     orange_regions = regionprops(refined_orange_mask, 'Centroid');
     orange_centroids = cat(1, orange_regions.Centroid);
+    
 
+    
     orange_centroids = sortrows(orange_centroids, 2);
     % Sort the top two by x-values
     orange_centroids(1:2,:) = sortrows(orange_centroids(1:2,:), 1);
     % Sort the bottom two by x-values
     orange_centroids(3:4,:) = sortrows(orange_centroids(3:4,:), 1);
+    
+    % Changes from 
+    % Point | Coordinates   |   Position
+    %   1   |   -284, 140   |   Top Left
+    %   2   |   672, 154    |   Top Right
+    %   3   |   272, 706    |   Bottom Left
+    %   4   |   774, 689    |   Bottom Right
+    %
+    % Real World:
+    % Point | Coordinates   |   Position
+    %   1   |   272, 706    |   Top Left
+    %   2   |   284, 140    |   Top Right
+    %   3   |   774, 689    |   Bottom Left
+    %   4   |   672,154     |   Bottom Right
 
+    orange_centroids = orange_centroids([3, 1, 4, 2], :)
 
 end

@@ -1,5 +1,5 @@
 function [transformation_purple, world_coordinates_orange] = computeHomography(orange_centroids, purple_centroids, world_coordinates_purple)
-   
+    
     % Computing the projective transformation for purple dots
     transformation_purple = fitgeotrans(purple_centroids, world_coordinates_purple, 'projective');
     homography_matrix_purple = transformation_purple.T;

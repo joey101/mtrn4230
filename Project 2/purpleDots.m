@@ -21,12 +21,30 @@
     purple_regions = regionprops(refined_purple_mask, 'Centroid');
     purple_centroids = cat(1, purple_regions.Centroid);
     purple_centroids(end+1,:) = extra_point;
-
+    
+    
     purple_centroids = sortrows(purple_centroids, 2);
     % Sort the top two by x-values
     purple_centroids(1:2,:) = sortrows(purple_centroids(1:2,:), 1);
     % Sort the bottom two by x-values
     purple_centroids(3:4,:) = sortrows(purple_centroids(3:4,:), 1);
-    
+    disp('After Sort')
+    purple_centroids
+    % Changes from 
+    % Point | Coordinates   |   Position
+    %   1   |   -250, 75    |   Top Left
+    %   2   |   -250, -525  |   Top Right
+    %   3   |   -900, 75    |   Bottom Left
+    %   4   |   -900, -525  |   Bottom Right
+    %
+    % Real World:
+    % Point | Coordinates   |   Position
+    %   1   |   -250, 75    |   Top Left
+    %   2   |   -250, -525  |   Top Right
+    %   3   |   -900, 75    |   Bottom Left
+    %   4   |   -900, -525  |   Bottom Right
+    disp('After Rearrange')
+    purple_centroids = purple_centroids([3, 1, 4, 2], :);
+
    
 end

@@ -14,6 +14,11 @@ hsv_image = rgb2hsv(img2);
 
 [orange_centroids] = orangeDots(hsv_image);
 [purple_centroids] = purpleDots(hsv_image);
+% Point | Coordinates
+%   1   |   -250, 75
+%   2   |   -250, -525
+%   3   |   -900, 75
+%   4   |   -900, -525
 world_coordinates_purple = [-250 75; -250 -525; -900 75; -900 -525];
 
 [transformation_purple, world_coordinates_orange] = computeHomography(orange_centroids, purple_centroids, world_coordinates_purple); 
@@ -21,7 +26,6 @@ world_coordinates_purple = [-250 75; -250 -525; -900 75; -900 -525];
 img_3 = imwarp(img2, transformation_purple);
 hsv_image = rgb2hsv(img_3);
 [orange_centroids] = orangeDots(hsv_image);
-
 
 % Compute the bounding box
 min_x = min(orange_centroids(:, 1));
