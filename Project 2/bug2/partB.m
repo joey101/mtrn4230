@@ -20,3 +20,23 @@ hold on;
 grid on;
 plot(path(:, 2), path(:, 1), 'g.-'); % Plot path
 hold off;
+
+% for i = 1:size(path, 1)
+%     % Update the map to show the path progress
+%     mapCopy = map;
+%     mapCopy(path(i, 1), path(i, 2)) = 5; % Mark the path cell
+% 
+%     % Display the updated map and path
+%     imagesc(mapCopy);
+%     title(['BUG2 Algorithm Iteration ' num2str(i)]);
+%     plot(path(:, 2), path(:, 1), 'g.-'); % Plot path
+%     hold off;
+% 
+%     % Pause for a short duration to observe each iteration
+%     pause(0.5);
+% 
+%     % If this is not the last iteration, hold the image for the next iteration
+%     if i < size(path, 1)
+%         hold on;
+%     end
+% end
