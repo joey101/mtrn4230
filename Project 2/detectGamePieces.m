@@ -1,4 +1,4 @@
-function [green_centroids, red_centroids, blue_centroids, green_stats, red_stats, blue_stats] = detectGamePieces(hsv_image, ROI_mask)
+function [green_centroids, red_centroids, blue_centroids, green_stats, red_stats, blue_stats] = detectGamePieces(hsv_image)
     % threshold = input("Which Threshold values do you want to use (1-2): ");
     % if threshold == 1
         % % Adjusted HSV thresholds for green (player piece)
@@ -46,11 +46,6 @@ function [green_centroids, red_centroids, blue_centroids, green_stats, red_stats
                 (hsv_image(:,:,2) >= blue_saturation_threshold(1) & hsv_image(:,:,2) <= blue_saturation_threshold(2)) & ...
                 (hsv_image(:,:,3) >= blue_value_threshold(1) & hsv_image(:,:,3) <= blue_value_threshold(2));
     
-    % Apply the ROI mask to the color-segmented masks
-    green_mask = green_mask & ROI_mask;
-    red_mask = red_mask & ROI_mask;
-    blue_mask = blue_mask & ROI_mask;
-
     % Obtain the centroids for each refined mask
     green_stats = regionprops(green_mask, 'Centroid', 'BoundingBox');
     green_centroids = cat(1, green_stats.Centroid);

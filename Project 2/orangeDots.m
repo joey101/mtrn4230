@@ -1,4 +1,4 @@
-function [orange_centroids, ROI_mask] = orangeDots(hsv_image)
+function [orange_centroids] = orangeDots(hsv_image)
     % threshold = input("Which Threshold values do you want to use (1 (works better on theirs) - 2(works better on mine)): ");
     % if threshold == 1
     %     % Uni Images threshold
@@ -22,12 +22,16 @@ function [orange_centroids, ROI_mask] = orangeDots(hsv_image)
     structuring_element = strel('disk', 7);
     closed_orange_mask = imclose(orange_mask, structuring_element);
     refined_orange_mask = bwareaopen(closed_orange_mask, 100);
-
+    
     % Detecting centroids of the orange regions
     orange_regions = regionprops(refined_orange_mask, 'Centroid');
     orange_centroids = cat(1, orange_regions.Centroid);
 
-    rows = size(hsv_image, 1);
-    cols = size(hsv_image, 2);
-    ROI_mask = poly2mask(orange_centroids(:,1), orange_centroids(:,2), rows, cols);
+    orange_centroids = sortrows(orange_centroids, 2);
+    % Sort the top two by x-values
+    orange_centroids(1:2,:) = sortrows(orange_centroids(1:2,:), 1);
+    % Sort the bottom two by x-values
+    orange_centroids(3:4,:) = sortrows(orange_centroids(3:4,:), 1);
+
+
 end

@@ -1,4 +1,5 @@
 function [hsv_image, img_rgb] = loadImage()
+    
     txt = input("Is it a JPG or .mat input (1 or 0): ");
     if txt == 1
         image = input("Which number jpg do you want (1-7): ");

@@ -22,6 +22,7 @@ img_3 = imwarp(img2, transformation_purple);
 hsv_image = rgb2hsv(img_3);
 [orange_centroids] = orangeDots(hsv_image);
 
+
 % Compute the bounding box
 min_x = min(orange_centroids(:, 1));
 max_x = max(orange_centroids(:, 1));

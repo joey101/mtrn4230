@@ -1,5 +1,5 @@
  % Own Image threshold
- function [purple_centroids, ROI_mask_purple] = purpleDots(hsv_image)
+ function [purple_centroids] = purpleDots(hsv_image)
 
     purple_hue_threshold = [0.67 0.88];
     purple_saturation_threshold = [0.5 1.00];
@@ -17,13 +17,16 @@
     refined_purple_mask = bwareaopen(closed_purple_mask, 100);
     
     % Detecting centroids of the purple regions
-    extra_point = [1300 740];
+    extra_point = [955 728];
     purple_regions = regionprops(refined_purple_mask, 'Centroid');
     purple_centroids = cat(1, purple_regions.Centroid);
-    purple_centroids(1,:) = extra_point;
+    purple_centroids(end+1,:) = extra_point;
 
-    rows = size(hsv_image, 1);
-    cols = size(hsv_image, 2);
-    ROI_mask_purple = poly2mask(purple_centroids(:,1), purple_centroids(:,2), rows, cols); 
+    purple_centroids = sortrows(purple_centroids, 2);
+    % Sort the top two by x-values
+    purple_centroids(1:2,:) = sortrows(purple_centroids(1:2,:), 1);
+    % Sort the bottom two by x-values
+    purple_centroids(3:4,:) = sortrows(purple_centroids(3:4,:), 1);
+    
    
 end
