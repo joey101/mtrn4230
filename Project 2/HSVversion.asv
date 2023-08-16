@@ -50,12 +50,11 @@ rect = [min_x, min_y, max_x-min_x, max_y-min_y];
 cropped_img = imcrop(img_3, rect);
 hsv_image = rgb2hsv(cropped_img);
 figure; imshow(hsv_image);
-
-[green_centroids, red_centroids, blue_centroids, green_stats, red_stats, blue_stats] = detectGamePieces(img_3);
+[green_centroids, red_centroids, blue_centroids, green_stats, red_stats, blue_stats] = detectGamePieces(hsv_image);
 transformed_green_centroids = transformPointsForward(transformation_purple, green_centroids(:, 1), green_centroids(:, 2));
-transformed_red_centroids = transformPointsForward(transformation_purple, red_centroids(:, 1), red_centroids(:, 2));
-transformed_blue_centroids = transformPointsForward(transformation_purple, blue_centroids(:, 1), blue_centroids(:, 2));
-grid_with_obstacles = popGrid(transformed_red_centroids, transformed_blue_centroids, transformed_green_centroids, occGrid)
+transformed_orange_centroids = transformPointsForward(transformation_purple, orange_centroids(:, 1), orange_centroids(:, 2));
+transformed_orange_centroids = transformPointsForward(transformation_purple, orange_centroids(:, 1), orange_centroids(:, 2));
+grid_with_obstacles = popGrid(red_centroids, blue_centroids, green_centroids, occGrid)
 
 displayResults(cropped_img, green_centroids, red_centroids, blue_centroids, green_stats, red_stats, blue_stats);
 

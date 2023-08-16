@@ -1,7 +1,7 @@
-function displayResults(img_rgb, transformation, green_centroids, red_centroids, blue_centroids, green_stats, red_stats, blue_stats)
+function displayResults(img_3, green_centroids, red_centroids, blue_centroids, green_stats, red_stats, blue_stats)
    % Displaying the detected centroids on the image
    
-    figure; imshow(imwarp(img_rgb, transformation)); title('Refined Detection of Game Pieces');
+    figure; imshow(img_3); title('Refined Detection of Game Pieces');
    
     hold on;
     
