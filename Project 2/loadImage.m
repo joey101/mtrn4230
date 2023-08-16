@@ -6,8 +6,11 @@ function [hsv_image, img_rgb] = loadImage()
         hsv_image = rgb2hsv(img_rgb);
     else
         load('imgdata.mat');
-        % figure; imshow(img1); title('Original Image');
         hsv_image = rgb2hsv(img1);
         img_rgb = img1; % For consistency
+        
+        figure; imshow(img1); title('Original Image');
+
     end
 end
+% [307.5 0.5 1613 1080]

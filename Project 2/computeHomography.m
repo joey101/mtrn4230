@@ -1,4 +1,4 @@
-function [transformation,transformation_purple, homography_matrix] = computeHomography(orange_centroids, purple_centroids)
+function [transformation,transformation_purple, homography_matrix, homography_matrix_purple] = computeHomography(orange_centroids, purple_centroids)
     image_coordinates = [orange_centroids(4, 1) orange_centroids(4, 2); 
                          orange_centroids(3, 1) orange_centroids(3, 2); 
                          orange_centroids(2, 1) orange_centroids(2, 2); 
