@@ -47,6 +47,6 @@ function [orange_centroids] = orangeDots(hsv_image)
     %   3   |   774, 689    |   Bottom Left
     %   4   |   672,154     |   Bottom Right
 
-    % 
+    % orange_centroids = orange_centroids([2,1,4,3], :)
 
 end

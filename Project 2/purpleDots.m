@@ -45,8 +45,9 @@
     %   2   |   -250, -525  |   Top Right
     %   3   |   -900, 75    |   Bottom Left
     %   4   |   -900, -525  |   Bottom Right
-
+    
     % disp('After Rearrange')
+    % purple_centroids = purple_centroids([2,1,4,3], :);
 
    
 end
