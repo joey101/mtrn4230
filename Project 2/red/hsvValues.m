@@ -1,15 +1,14 @@
 % Load your RGB image
-load('imgdata.mat');
-% 
-% % Convert RGB image to HSV
-% hsvImage = rgb2hsv(img1);
 
-img_rgb = imread('6.jpg');
-% Convert the RGB image to HSV
-hsvImage = rgb2hsv(img_rgb);
-% % Display the RGB image
+hsvImage = rgb2hsv(img2);
+
+% % Convert the RGB image to HSV
+% hsvImage = rgb2hsv(img_rgb);
+
+
+
 figure;
-imshow(img_rgb);
+imshow(hsvImage);
 title('Click on a pixel to get its HSV values');
 
 

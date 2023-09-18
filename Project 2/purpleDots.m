@@ -16,6 +16,8 @@
     closed_purple_mask = imclose(purple_mask, structuring_element);
     refined_purple_mask = bwareaopen(closed_purple_mask, 100);
     
+    
+
     % Detecting centroids of the purple regions
     extra_point = [955 728];
     purple_regions = regionprops(refined_purple_mask, 'Centroid');
@@ -43,8 +45,9 @@
     %   2   |   -250, -525  |   Top Right
     %   3   |   -900, 75    |   Bottom Left
     %   4   |   -900, -525  |   Bottom Right
-    disp('After Rearrange')
-    purple_centroids = purple_centroids([3, 1, 4, 2], :);
+    
+    % disp('After Rearrange')
+    % purple_centroids = purple_centroids([2,1,4,3], :);
 
    
 end
